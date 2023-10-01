@@ -1,7 +1,9 @@
 from random import randint, choice as rc
 from faker import Faker
 from app import app
-from models import db, Restaurant, Pizza, RestaurantPizza
+from models.restaurantpizza import RestaurantPizza
+from models.restaurant import Restaurant
+from models.pizza import Pizza,db
 from datetime import datetime
 
 fake = Faker()

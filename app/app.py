@@ -1,7 +1,8 @@
 from flask import Flask, request, jsonify, abort
 from flask_migrate import Migrate
-from models import db, Restaurant, Pizza, RestaurantPizza 
-
+from models.restaurantpizza import RestaurantPizza
+from models.restaurant import Restaurant
+from models.pizza import Pizza,db
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db/app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -75,3 +76,34 @@ def delete_restaurant(id):
     db.session.commit()
 
     return '', 204
+
+@app.route('/restaurant_pizzas', methods=['POST'])
+def create_restaurant_pizza():
+    data = request.json
+    if not all(key in data for key in ['price', 'pizza_id', 'restaurant_id']):
+        return jsonify({'errors': ['validation errors']}), 400
+
+    pizza_id = data['pizza_id']
+    restaurant_id = data['restaurant_id']
+
+    pizza = Pizza.query.get(pizza_id)
+    if pizza is None:
+        return jsonify({'error': 'Pizza not found'}), 404
+
+    restaurant = Restaurant.query.get(restaurant_id)
+    if restaurant is None:
+        return jsonify({'error': 'Restaurant not found'}), 404
+
+    restaurant_pizza = RestaurantPizza(price=data['price'], pizza=pizza, restaurant=restaurant)
+    db.session.add(restaurant_pizza)
+    db.session.commit()
+
+    return jsonify({
+        'id': pizza.id,
+        'name': pizza.name,
+        'ingredients': pizza.ingredients
+    }), 201
+
+if __name__ == '__main__':
+    app.run(port=5501, debug=True)
+    
