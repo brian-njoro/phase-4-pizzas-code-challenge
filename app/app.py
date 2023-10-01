@@ -25,3 +25,25 @@ def get_restaurants():
         }
         restaurant_list.append(restaurant_info)
     return jsonify(restaurant_list)
+
+@app.route('/restaurants/<int:id>')
+def get_restaurant(id):
+    restaurant = Restaurant.query.get(id)
+    if restaurant is None:
+        return jsonify({'error': 'Restaurant not found'}), 404
+    
+    restaurant_info = {
+        'id': restaurant.id,
+        'name': restaurant.name,
+        'address': restaurant.address,
+        'pizzas': []
+    }
+    for pizza in restaurant.pizzas:
+        pizza_info = {
+            'id': pizza.id,
+            'name': pizza.name,
+            'ingredients': pizza.ingredients
+        }
+        restaurant_info['pizzas'].append(pizza_info)
+    
+    return jsonify(restaurant_info)
