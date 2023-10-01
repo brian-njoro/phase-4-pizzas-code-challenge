@@ -1,12 +1,11 @@
 from flask import Flask
 from flask_migrate import Migrate
-from flask_cors import CORS  # Import Flask-CORS
+from flask_cors import CORS  
 from routes import create_app
-from models.pizza import db  # Import your SQLAlchemy instance
+from models.pizza import db  
 
 app = create_app()
 
-# Configure CORS - allow all origins by default
 CORS(app)
 
 # Configure SQLAlchemy database URI

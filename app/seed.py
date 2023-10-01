@@ -18,8 +18,11 @@ def seed_data():
 
         restaurants = []
         for _ in range(40):
-            r = Restaurant(name=fake.company())
+            name = fake.company()
+            address = fake.address()
+            r = Restaurant(name=name,address=address)
             restaurants.append(r)
+
 
         db.session.add_all(restaurants)
         db.session.commit()

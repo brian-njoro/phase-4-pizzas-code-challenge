@@ -6,6 +6,12 @@ class Pizza(db.Model):
     price = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
 
+    def serialize(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+        }
+
     @validates('price')
     def validate_price(self, key, price):
         if not (1 <= price <= 30):
