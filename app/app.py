@@ -47,3 +47,16 @@ def get_restaurant(id):
         restaurant_info['pizzas'].append(pizza_info)
     
     return jsonify(restaurant_info)
+
+@app.route('/pizzas')
+def get_pizzas():
+    pizzas = Pizza.query.all()
+    pizza_list = []
+    for pizza in pizzas:
+        pizza_info = {
+            'id': pizza.id,
+            'name': pizza.name,
+            'ingredients': pizza.ingredients
+        }
+        pizza_list.append(pizza_info)
+    return jsonify(pizza_list)
