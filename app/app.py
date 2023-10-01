@@ -12,3 +12,16 @@ migrate = Migrate(app, db)
 @app.route('/Home')
 def home():
     return '<h2>Flask app for Restaurants</h2>'
+
+@app.route('/restaurants')
+def get_restaurants():
+    restaurants = Restaurant.query.all()
+    restaurant_list = []
+    for restaurant in restaurants:
+        restaurant_info = {
+            'id': restaurant.id,
+            'name': restaurant.name,
+            'address': restaurant.address
+        }
+        restaurant_list.append(restaurant_info)
+    return jsonify(restaurant_list)
