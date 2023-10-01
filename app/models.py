@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
+from sqlalchemy.orm import validates
 
 db = SQLAlchemy()
 
@@ -13,6 +15,12 @@ class Pizza(db.Model):
     name = db.Column(db.String, nullable=False)
     price = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, nullable=False)
+
+    @validates('price')
+    def validate_price(self, key, price):
+        if not (1 <= price <= 30):
+            raise ValueError('Price must be between 1 and 30.')
+        return price
 
 class RestaurantPizza(db.Model):
     id = db.Column(db.Integer, primary_key=True)
