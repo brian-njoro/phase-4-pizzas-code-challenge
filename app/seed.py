@@ -17,7 +17,7 @@ def seed_data():
         Pizza.query.delete()
 
         restaurants = []
-        for _ in range(20):
+        for _ in range(40):
             r = Restaurant(name=fake.company())
             restaurants.append(r)
 
@@ -45,3 +45,4 @@ def seed_data():
 
 if __name__ == '__main__':
     seed_data()
+
