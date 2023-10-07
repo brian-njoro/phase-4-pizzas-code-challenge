@@ -14,9 +14,9 @@ with app.app_context():
 
   
     restaurants = [
-        Restaurant(name="Pizza Palace", address="123 Main St"),
-        Restaurant(name="Mama Mia Pizzeria", address="456 Elm St"),
-        Restaurant(name="Pepperoni Heaven", address="789 Oak St"),
+        Restaurant(name="Pizza Pit", address="123 Main St"),
+        Restaurant(name="Graceful Treats Pizzeria", address="456 Elm St"),
+        Restaurant(name="Pizza Paradise", address="789 Oak St"),
         Restaurant(name="Slice of Heaven", address="101 Pine St"),
         Restaurant(name="The Pizza Hut", address="222 Maple St"),
         Restaurant(name="Pizza Planet", address="333 Birch St"),
@@ -34,9 +34,9 @@ with app.app_context():
 
     
     pizzas = [
-        Pizza(name="Margherita", ingredients="Tomato, Mozzarella, Basil"),
+        Pizza(name="deluxe", ingredients="Tomato, Mozzarella, Basil"),
         Pizza(name="Pepperoni", ingredients="Tomato, Mozzarella, Pepperoni"),
-        Pizza(name="Vegetarian", ingredients="Tomato, Mozzarella, Bell Peppers, Mushrooms"),
+        Pizza(name="Chicken Tikka", ingredients="Tomato, Mozzarella, Bell Peppers, Mushrooms"),
         Pizza(name="Hawaiian", ingredients="Tomato, Mozzarella, Ham, Pineapple"),
         Pizza(name="Supreme", ingredients="Tomato, Mozzarella, Pepperoni, Sausage, Bell Peppers, Onions, Olives"),
         Pizza(name="BBQ Chicken", ingredients="BBQ Sauce, Mozzarella, Chicken, Red Onion, Cilantro"),
