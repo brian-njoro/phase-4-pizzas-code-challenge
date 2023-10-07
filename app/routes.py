@@ -1,7 +1,7 @@
 from flask import Flask, current_app, make_response, request, jsonify, g
 from flask_cors import CORS
 import os
-from models.restaurantpizza import RestaurantPizza
+from models.restaurantpizza import restaurant_pizza
 from models.restaurant import Restaurant
 from models.pizza import Pizza,db
 
@@ -71,7 +71,7 @@ def create_app():
             return jsonify({'error': 'Restaurant not found'}), 404
         
         # Deleting RestaurantPizza entries
-        RestaurantPizza.query.filter_by(restaurant_id=id).delete()
+        restaurant_pizza.query.filter_by(restaurant_id=id).delete()
 
         db.session.delete(restaurant)
         db.session.commit()
@@ -94,7 +94,7 @@ def create_app():
         if restaurant is None:
             return jsonify({'error': 'Restaurant not found'}), 404
 
-        restaurant_pizza = RestaurantPizza(price=data['price'], pizza=pizza, restaurant=restaurant )
+        restaurant_pizza = restaurant_pizza(price=data['price'], pizza=pizza, restaurant=restaurant )
         db.session.add(restaurant_pizza)
         db.session.commit()
 
