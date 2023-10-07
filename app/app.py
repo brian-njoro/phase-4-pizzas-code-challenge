@@ -18,7 +18,7 @@ api = Api(app)
 db.init_app(app)
 migrate = Migrate(app,db)
 
-class Display(Resource):
+class Get_Restaurants(Resource):
     def get(self):
         restaurants = [
             {'id':restaurant.id,
@@ -30,7 +30,7 @@ class Display(Resource):
         return jsonify(restaurants)
     
 
-class Display_Restaurants_by_id(Resource):
+class Restaurants_by_id(Resource):
     def get(self,id):
         restaurant = Restaurant.query.filter_by(id=id).first()
         
@@ -66,7 +66,7 @@ class Display_Restaurants_by_id(Resource):
         return {}, 200
     
              
-class Display_Pizzas(Resource):
+class Get_Pizzas(Resource):
     def get(self):
         pizzas= [ 
             {
@@ -88,14 +88,14 @@ class CreateRestaurantPizza(Resource):
 
         required_fields = ["price", "pizza_id", "restaurant_id"]
         if not all(field in data for field in required_fields):
-            return {"error": "price, pizza_id, and restaurant_id are required fields"}, 400
+            return {"error": "price, pizza_id, and restaurant_id are required!!"}, 400
 
         try:
             price = int(data["price"])
             if not (1 <= price <= 30):
-                return {"error": "price must be an integer between 1 and 30"}, 400
+                return {"error": "price must be a number between 1 and 30"}, 400
         except ValueError:
-            return {"error": "price must be an integer between 1 nad 30"}, 400
+            return {"error": "The price must be a number between 1 nad 30"}, 400
 
         pizza = Pizza.query.get(data["pizza_id"])
         restaurant = Restaurant.query.get(data["restaurant_id"])
@@ -116,14 +116,13 @@ class CreateRestaurantPizza(Resource):
             'name': pizza.name,
             'ingredients': pizza.ingredients
         }
-
         return pizza_data, 201
 
 
 api.add_resource(CreateRestaurantPizza, '/restaurant_pizzas', endpoint='/restaurant_pizzas')   
-api.add_resource(Display,'/restaurants',endpoint='/restaurants')
-api.add_resource(Display_Restaurants_by_id,'/restaurants/<int:id>',endpoint='/restaurants/<int:id>')
-api.add_resource(Display_Pizzas,'/pizzas', endpoint='/pizzas')
+api.add_resource(Get_Restaurants,'/restaurants',endpoint='/restaurants')
+api.add_resource(Restaurants_by_id,'/restaurants/<int:id>',endpoint='/restaurants/<int:id>')
+api.add_resource(Get_Pizzas,'/pizzas', endpoint='/pizzas')
 
 if __name__ == "__main__":
     app.run(port=5555,debug=True)
