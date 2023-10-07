@@ -1,7 +1,7 @@
 from random import randint, choice as rc
 from faker import Faker
 from app import app
-from models.restaurantpizza import RestaurantPizza
+from models.restaurantpizza import restaurant_pizza
 from models.restaurant import Restaurant
 from models.pizza import Pizza,db
 from datetime import datetime
@@ -12,7 +12,7 @@ def seed_data():
     with app.app_context():
         db.create_all()
 
-        RestaurantPizza.query.delete()
+        restaurant_pizza.query.delete()
         Restaurant.query.delete()
         Pizza.query.delete()
 
@@ -40,7 +40,7 @@ def seed_data():
             num_pizzas = randint(1, 5)
             sampled_pizzas = rc(pizzas, k=num_pizzas)
             for pizza in sampled_pizzas:
-                rp = RestaurantPizza(restaurant_id=restaurant.id, pizza_id=pizza.id)
+                rp = restaurant_pizza(restaurant_id=restaurant.id, pizza_id=pizza.id)
                 restaurant_pizzas.append(rp)
 
         db.session.add_all(restaurant_pizzas)
