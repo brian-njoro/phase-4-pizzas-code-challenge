@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-export default function RestaurantList() {
+function RestaurantList() {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
-    fetch('/restaurants')
+    fetch('http://127.0.0.1:5000/restaurants')
       .then((response) => response.json())
       .then((data) => setRestaurants(data))
       .catch((error) => console.error(error));
@@ -26,3 +26,4 @@ export default function RestaurantList() {
 }
 
 
+export default RestaurantList;

@@ -1,19 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Home from './Home';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; 
+import Home from './home';
 import RestaurantList from './RestaurantList';
-import RestaurantDetail from './RestaurantDetail';
+import RestaurantDetail from "./RestaurantDetail"
+import PizzaList from './PizzaList';
 
 function App() {
   return (
     <Router>
-      <div>
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/restaurants" exact component={RestaurantList} />
-          <Route path="/restaurants/:id" component={RestaurantDetail} />
-        </Switch>
-      </div>
+      <Routes>
+        <Route path="/restaurants/:id" element={<RestaurantDetail />} />
+        <Route path = "/restaurants" element={<RestaurantList />} />
+        <Route path = "/pizzas" element = {<PizzaList />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
     </Router>
   );
 }

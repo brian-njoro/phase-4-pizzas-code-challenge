@@ -4,7 +4,7 @@ export default function PizzaList() {
   const [pizzas, setPizzas] = useState([]);
 
   useEffect(() => {
-    fetch('/pizzas')
+    fetch('http://127.0.0.1:5000/pizzas')
       .then((response) => response.json())
       .then((data) => setPizzas(data))
       .catch((error) => console.error(error));
