@@ -4,14 +4,13 @@ import Home from './home';
 import RestaurantList from './RestaurantList';
 import RestaurantDetail from "./RestaurantDetail"
 import PizzaList from './PizzaList';
-
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/restaurants/:id" element={<RestaurantDetail />} />
         <Route path = "/restaurants" element={<RestaurantList />} />
-        <Route path = "/pizzas" element = {<PizzaListght awa />} />
+        <Route path = "/pizzas" element = {<PizzaList />} />
         <Route path="/" element={<Home />} />
       </Routes>
     </Router>

@@ -1,9 +1,0 @@
-from .dbconfig import db
-from .restaurantpizza import restaurant_pizza
-
-class Restaurant(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    address = db.Column(db.String)
-    
-    pizza = db.relationship('Pizza', secondary=restaurant_pizza, backref='restaurants')
